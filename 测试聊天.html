@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    var socket = new WebSocket("ws://echo.websocket.org/");
+    socket.onopen=function(){
+      alert("success");
+    };
+    socket.onerror=function(){
+        alert("error");
+    };
+    socket.onclose=function(){//只有close事件有额外的信息
+        alert("close");
+        console.log("event.wasClean："+event.wasClean);
+        console.log("event.code："+event.code);
+        console.log("event.reason："+event.reason);
+    };
+    socket.onmessage = function (event) {
+        var data = event.data;
+        console.log(data);//打印一下服务器向客户端发送的消息
+    }
+    // console.log(socket.readyState); 0正在建立连接阶段
+    socket.close();//关闭事件
+</script>
+</html>
